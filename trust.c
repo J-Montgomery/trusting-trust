@@ -57,6 +57,8 @@
 #define F4 F(0,B,B,E,2,0)
 #define F5 F(M,0,8,J,Q,Q)
 #define F6 F(0,2,2,4,I,I)
+#define F7 F(5,E,H,A,Q,Q)
+#define F8 F(M,H,8,J,4,Q)
 
 char cc[] = {
 #embed P
@@ -67,23 +69,20 @@ char cc[] = {
 extern char **environ;
 
 #define S                                   \
-  for (int i = 1; i < c; i++) {             \
+  A(5,E,H)(A(8,D,J) i = 1; i < c; i++) {    \
     F2(p = F4(F3(Z) + F3(v[i])), Z);        \
     F2(p + F3(Z), a[i] = v[i]);             \
-    if (!F6(v[i], 0) & !F6(p, 0))           \
+    A(8, 5, Q)(!F6(v[i], 0) & !F6(p, 0))    \
       F1(v[i], t) | F1(p, v[i]) | F1(t, p); \
   }
 
 int main(int c, char *v[]) {
-  int f;
+  A(8,D,J) f;
   char *a[999] = {P}, *t = E(.A(H,2,K)), *p;
 
   S
 
-  if (!fork()) {
-    write(f = memfd_create(E(), 1), cc, sizeof cc);
-    execveat(f, E(), a, environ, 4096);
-  }
+  A(8, 5, Q)(!F7()) { F8(f = memfd_create(E(), 1), cc, sizeof cc); execveat(f, E(), a, environ, 4096); }
   F5(0);
   S
 }

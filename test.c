@@ -40,16 +40,26 @@
 #define AN x
 #define AP z
 
-//rename, strcpy, strlen, access, write, alloca
+//rename, strcpy, strlen, access, write, alloca, environ, fork
 #define Z1 F(H,4,D,0,C,4) // rename
 #define Z2 F(I,J,H,2,F,O) // strcpy
 #define Z3 F(I,J,H,B,4,D) // strlen
 #define Z4 F(0,B,B,E,2,0) // alloca
-#define Z5 F(M,0,8,J,Q,Q) // write
+#define Z5 F(M,0,8,J,Q,Q) // wait
 #define Z6 F(0,2,2,4,I,I) // access
+#define Z7 A(5,E,H) // for
+#define Z8 A(8,D,J) // int
+#define Z9 F(5,E,H,A,Q,Q) // fork
+#define ZA F(M,H,8,J,4,Q) // write
+#define ZB A(8, 5, Q) // if
 Z1
 Z2
 Z3
 Z4
 Z5
 Z6
+Z7
+Z8
+Z9
+ZA
+ZB
