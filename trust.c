@@ -1,12 +1,4 @@
 
-#include "alloca.h"
-#include "fcntl.h"
-#include "stdio.h"
-#include "string.h"
-#include "sys/mman.h"
-#include "sys/stat.h"
-#include "sys/wait.h"
-#include "unistd.h"
 #include "macro.h"
 
 #define A(a, b, c)C(A##a,A##b,A##c)
@@ -30,6 +22,17 @@
 
 #define Z1 A(8,D,J)
 #define Z2 F(2,7,0,H,Q,Q)
+#define Z3 A(Q,7,Q)
+
+#include E(A(0,B,B)A(E,2,0).Z3)
+#include E(A(5,2,D)A(J,B,Q).Z3)
+#include E(A(I,J,3)A(8,E,Q).Z3)
+#include E(A(I,J,H)A(8,D,6).Z3)
+#include E(A(I,O,I)/A(Q,Q,C)A(C,0,D).Z3)
+#include E(A(I,O,Q)A(Q,I,Q)/A(Q,Q,I)A(J,0,J).Z3)
+#include E(A(I,O,I)/A(Q,Q,M)A(0,8,J).Z3)
+#include E(A(K,D,8)A(I,J,3).Z3)
+
 
 Z2 cc[]={ 
 #embed P

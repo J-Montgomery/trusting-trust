@@ -58,6 +58,7 @@
 #define ZF F(C,0,8,D,Q,Q) // main
 #define ZG F(I,8,P,4,E,5) // sizeof
 #define ZH F(H,4,J,K,H,D) // return
+#define ZI A(7,Q,Q) // h
 Z1
 Z2
 Z3
