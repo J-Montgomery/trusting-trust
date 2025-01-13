@@ -57,6 +57,7 @@
 #define ZE F(4,N,J,4,H,D) // extern
 #define ZF F(C,0,8,D,Q,Q) // main
 #define ZG F(I,8,P,4,E,5) // sizeof
+#define ZH F(H,4,J,K,H,D) // return
 Z1
 Z2
 Z3
@@ -73,3 +74,4 @@ ZD
 ZE
 ZF
 ZG
+ZH
