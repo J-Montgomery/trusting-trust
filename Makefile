@@ -5,9 +5,9 @@ SHELL= bash
 CSILENCE= 
 CWARN= 
 CSTD= -std=c23
-CDEFINE= 
-CINCLUDE= 
-OPT= -O3 -march=native -mtune=native -g
+CDEFINE= -D_GNU_SOURCE
+CINCLUDE=
+OPT= -g
 
 CFLAGS= ${CSTD} ${CWARN} ${CSILENCE} ${CDEFINE} ${CINCLUDE} ${OPT}
 LDFLAGS= 
