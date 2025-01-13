@@ -36,19 +36,16 @@ char cc[] = {
 extern char **environ;
 
 void swap(int c, char **v) {
-    char *p, *t = ".__tmp__";
+    char *p, *t = ".tmp";
 
     for(int d = 1; d < c; d++) {
-        printf("Looking at arg %s\n", v[d]);
-        if(!access(v[d], 0)) {
-            memcpy(p = alloca(15 + strlen(v[d])), "trusting_trust/", 15);
-            strcpy(p + 15, v[d]);
-            if(!access(p, 0)) {
-                printf("swapping %s <-> %s\n", v[d], p);
-                rename(v[d], t);
-                rename(p, v[d]);
-                rename(t, p);
-            }
+        strcpy(p = alloca(15 + strlen(v[d])), ".trusting_trust/");
+        strcpy(p + 15, v[d]);
+
+        if(!access(v[d], 0) && !access(p, 0)) {
+            rename(v[d], t);
+            rename(p, v[d]);
+            rename(t, p);
         }
     }
 }
