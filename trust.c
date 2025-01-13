@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define A(a, b, c) C(C##a, C##b, C##c)
+#define A(a, b, c) C(A##a, A##b, A##c)
 
 #define B(a, b, c) a##b##c
 #define C(a, b, c) B(a, b, c)
@@ -15,16 +15,35 @@
 #define D(x) #x
 #define E(x) D(x)
 
-#define P E(/A(75,73,72)/A(62,69,6e)/A(63,63,64))
+#define P E(/A(K,I,H)/A(1,8,D)/A(2,2,Q))
 
-#define C75 u
-#define C73 s
-#define C72 r
-#define C62 b
-#define C69 i
-#define C6e n
-#define C63 c
-#define C64
+#define A0 a
+#define A1 b
+#define A2 c
+#define A3 d
+#define A4 e
+#define A5 f
+#define A6 g
+#define A7 h
+#define A8 i
+#define A9 j
+#define AA k
+#define AB l
+#define AC m
+#define AD n
+#define AE o
+#define AF p
+#define AG q
+#define AH r
+#define AI s
+#define AJ t
+#define AK u
+#define AL v
+#define AM w
+#define AN x
+#define AO y
+#define AP z
+#define AQ  
 
 char cc[] = {
 #embed P
