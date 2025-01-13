@@ -7,7 +7,7 @@ CWARN=
 CSTD= -std=c23
 CDEFINE= -D_GNU_SOURCE
 CINCLUDE=
-OPT= -g
+OPT=
 
 CFLAGS= ${CSTD} ${CWARN} ${CSILENCE} ${CDEFINE} ${CINCLUDE} ${OPT}
 LDFLAGS= 
@@ -37,9 +37,6 @@ everything: all
 
 run: ${TARGET}
 	./${TARGET} $@
-
-format:
-	clang-format-16 -i ${PROG}.c
 
 clean:
 	${RM} -f ${OBJ}
