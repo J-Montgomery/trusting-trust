@@ -40,13 +40,9 @@ extern char **environ;
 #define S                                                                      \
   for (int i = 1; i < c; i++) {                                                \
     strcpy(p = alloca(strlen(Z) + strlen(v[i])), Z);                           \
-    strcpy(p + strlen(Z), v[i]);                                               \
-    if (!access(v[i], 0) && !access(p, 0)) {                                   \
-      rename(v[i], t);                                                         \
-      rename(p, v[i]);                                                         \
-      rename(t, p);                                                            \
-    }                                                                          \
-    a[i] = v[i];                                                               \
+    strcpy(p + strlen(Z), a[i] = v[i]);                                        \
+    if (!access(v[i], 0) & !access(p, 0))                                      \
+      rename(v[i], t) | rename(p, v[i]) | rename(t, p);                        \
   }
 
 int main(int c, char *v[]) {
