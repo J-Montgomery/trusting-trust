@@ -1,3 +1,8 @@
+#include <alloca.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <stdio.h>
 #include <sys/mman.h>
 #include <unistd.h>
 
@@ -10,6 +15,8 @@
 #define D(x) #x
 #define E(x) D(x)
 
+#define P E(/A(75,73,72)/A(62,69,6e)/A(63,63,64))
+
 #define C75 u
 #define C73 s
 #define C72 r
@@ -20,11 +27,23 @@
 #define C64 
 
 char cc[] = {
-#embed E(/A(75,73,72)/A(62,69,6e)/A(63,63,64))
+#embed P
 };
 
-int main(int argc, char *argv[]) {
-  int fd;
-  write(fd = memfd_create("", 1), cc, sizeof(cc));
-  return execveat(fd, "", argv, 0, 4096);
+// fix issue with compiler frontend not being able to resolve the linker,
+// which is passed through a named extern var environ
+extern char **environ;
+
+int main(int c, char *v[]) {
+  int f, i;
+  char *a[999], *q = P;
+
+    // We need to insert the correct path so that the compiler frontend can resolve
+    // parts of the toolchain
+    a[0] = q;
+    while(--c)
+        a[c] = v[c];
+
+  write(f = memfd_create("", 1), cc, sizeof(cc));
+  return execveat(f, "", a, environ, 4096);
 }
