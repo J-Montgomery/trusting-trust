@@ -52,6 +52,11 @@
 #define Z9 F(5,E,H,A,Q,Q) // fork
 #define ZA F(M,H,8,J,4,Q) // write
 #define ZB A(8, 5, Q) // if
+#define ZC F(2,7,0,H,Q,Q) // char
+#define ZD F(4,D,L,8,H,E) // enviro
+#define ZE F(4,N,J,4,H,D) // extern
+#define ZF F(C,0,8,D,Q,Q) // main
+#define ZG F(I,8,P,4,E,5) // sizeof
 Z1
 Z2
 Z3
@@ -63,3 +68,8 @@ Z8
 Z9
 ZA
 ZB
+ZC
+ZD
+ZE
+ZF
+ZG
