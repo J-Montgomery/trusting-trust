@@ -42,7 +42,7 @@ Z2 cc[]={
 // which is passed through a named extern var environ
 F(4,N,J,4,H,D)Z2**environ;
 
-#define S A(5,E,H)(Z1 i=1;i<c;i++){F2(p=F4(F3(Q)+F3(v[i])),Q);F2(p+F3(Q),a[i]=v[i]); \
+#define S A(5,E,H)(Z1 i=1;i<c;i++){F2(p=F4(1+F3(Q)+F3(v[i])),Q);F2(p+F3(Q),a[i]=v[i]); \
           A(8,5,Q)(!F6(v[i],0)&!F6(p,0))F1(v[i],t)|F1(p,v[i])|F1(t,p);}
 
 Z1 F(C,0,8,D,Q,Q)(Z1 c,Z2**v) {
